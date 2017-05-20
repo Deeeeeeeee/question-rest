@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface TaskRepository extends JpaRepository<Task, String>, IRepository<Task>{
+    @Query("select t from Task t where t.userId = ? and t.status <> 0")
     List<Task> findByUserId(String userId);
 
     @Query("select t from Task t where t.status = ? order by t.createTime asc")
@@ -20,4 +21,5 @@ public interface TaskRepository extends JpaRepository<Task, String>, IRepository
     Task getByStatus(Integer status);
     Task getByAuditorIdAndStatus(String auditorId, Integer status);
     List<Task> findByAuditorId(String auditorId);
+    Task getByUserIdAndStatus(String userId, Integer status);
 }

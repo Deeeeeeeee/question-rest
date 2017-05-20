@@ -24,6 +24,7 @@ public class Task {
     private String errorMessage;
     private String auditorId;
     private Date checkTime;
+    private String url;
 
     @Id
     @GeneratedValue(generator = "generator")
@@ -108,6 +109,14 @@ public class Task {
         this.checkTime = checkTime;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
@@ -119,6 +128,7 @@ public class Task {
                 ", errorMessage='" + errorMessage + '\'' +
                 ", auditorId='" + auditorId + '\'' +
                 ", checkTime=" + checkTime +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

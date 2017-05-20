@@ -56,4 +56,11 @@ public class TaskRepositoryTest {
         List<Task> tasks = taskRepository.findByAuditorId("ff8081815c06b949015c06ba03580000");
         System.out.println(tasks);
     }
+
+    @Test
+    @Transactional
+    public void getByUserIdAndStatus() {
+        Task task = taskRepository.getByUserIdAndStatus("12", Integer.valueOf(0));
+        System.out.println(task);
+    }
 }

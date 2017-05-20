@@ -15,4 +15,5 @@ public interface TaskService extends IService<Task> {
     List<TaskInfoModel> taskToTaskInfoModel(List<Task> tasks);
     Task getByAuditorId(String auditorId);
     List<Task> findByAuditorId(String auditorId);
+    Task getNotMakingTask(String userId);
 }

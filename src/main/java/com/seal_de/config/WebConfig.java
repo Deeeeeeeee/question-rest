@@ -59,6 +59,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/**").excludePathPatterns("/");
         registry.addInterceptor(new TokenInterceptor(tokenManager))
                 .addPathPatterns("/**").excludePathPatterns("/", "/register", "/login", "/provinces", "/cities/**",
+                "/task/fileUpload",
                 "/configuration/ui", "/configuration/security", "/v2/api-docs", "/swagger**");
     }
 

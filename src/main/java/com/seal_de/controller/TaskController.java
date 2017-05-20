@@ -5,6 +5,7 @@ import com.seal_de.model.PaperInfoModel;
 import com.seal_de.model.PaperItemInfoModel;
 import com.seal_de.model.TaskInfoModel;
 import com.seal_de.service.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +48,26 @@ public class TaskController {
         return taskInfoModels;
     }
 
+    @GetMapping(value = "/getImg")
+    public String[] getImg(UserInfo user) {
+        Task task = taskService.getNotMakingTask(user.getId());
+        String url = task.getUrl();
+        return StringUtils.split(url, ",");
+    }
+
+    @GetMapping(value = "/getImg/{taskId}")
+    public String[] getImgByTaskId(@PathVariable String taskId) {
+        Task task = taskService.getById(taskId);
+        String url = task.getUrl();
+        return StringUtils.split(url, ",");
+    }
+
     @RequestMapping(value = "/startMaking", method = RequestMethod.POST)
     public Map<String, String> startMaking(UserInfo user, @RequestBody Paper paper) {
-        Task task = processTask(user.getId(), paper);
+        Task task = taskService.getNotMakingTask(user.getId());
+        notNull(task, HttpStatus.NOT_FOUND, "操作失败：未上传图片不能执行制作操作");
+
+        task = processTask(task, user.getId(), paper);
         paperService.save(paper);
         taskService.save(task);
 
@@ -60,10 +78,10 @@ public class TaskController {
         return new HashMap<String, String>(){{this.put("taskId", taskId);}};
     }
 
-    private Task processTask(String userId, Paper paper) {
-        Task task = new Task();
+    private Task processTask(Task task, String userId, Paper paper) {
         task.setUserId(userId);
         task.setPaperId(paper);
+        task.setStatus(10);
         return task;
     }
 
