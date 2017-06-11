@@ -37,14 +37,22 @@ repositories {
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web")
 	compile("org.springframework.boot:spring-boot-devtools")
+
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	compile("org.springframework.security:spring-security-web:4.2.2.RELEASE")
-	compile("io.springfox:springfox-swagger2:2.4.0")
-	compile("io.springfox:springfox-swagger-ui:2.4.0")
-	compile("org.apache.commons:commons-lang3:3.4")
+	compile("org.springframework.boot:spring-boot-starter-data-redis")
+
+	compile("org.springframework.security:spring-security-web:$springSecurityWebVersion")
+
+	compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+	compile("redis.clients:jedis:$redisVersion")
+
+	compile("io.springfox:springfox-swagger2:$springfoxSwagger2Version")
+	compile("io.springfox:springfox-swagger-ui:$springfoxSwaggerUiVersion")
+
+	compile("org.apache.commons:commons-lang3:$commonsLang3Version")
 //	compile("org.thymeleaf:thymeleaf-spring4")
-	compile("com.alibaba:druid:1.0.25")
-	runtime("mysql:mysql-connector-java:5.1.13")
+	compile("com.alibaba:druid:$druidVersion")
+	runtime("mysql:mysql-connector-java:$mysqlConnectorJavaVersion")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
